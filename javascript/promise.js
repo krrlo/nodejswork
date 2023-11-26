@@ -4,7 +4,7 @@ const promise = new Promise((resolve, reject) => {              //성공, 실패
     }else{
         reject(new Error("에러메세지"));
     }
-}
+})
 
 
 //promise
