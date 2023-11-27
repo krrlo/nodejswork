@@ -20,13 +20,15 @@ const interval = setInterval(()=> {
     }
 },1000);
 
+console.log('마지막');
+
 
 //즉시실행 
 const immedate = setImmediate(()=> {
     console.log('즉시실행');
 })
 
-console.log('마지막');
+
 
 //set immediate 뒤에 코드가 있으면  먼저 실행되고 그다음에 콜백함수가 실행됨 
 //스택이 비어있는 상태일때 이벤트루프가 파스를 돌면서 가지고있는 콜백이 있을 경우  스택에 넘김 

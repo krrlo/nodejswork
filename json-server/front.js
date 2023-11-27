@@ -21,10 +21,10 @@ fetch('http://localhost:3000/posts/1')   //조회하고자하는 대상에 대�
 //     headers : {
 //         'content-type' : 'application/json'   //제이슨데이터를 보낼때는 얘로 
 //     },
-//     body : JSON.stringify({ userId :2, id:4, title : ' gkgkgkgkgk' , body : 'dfdfasdfasdfksdaj;flksjad '})   //객체로 보낼 데이터를 집어넣음 //내가가진 객체를 제이슨 포맷으로 변환시키는거 
+//     body : JSON.stringify({ userId :2, id:5, title : ' gkgkgkgkgk' , body : 'dfdfasdfasdfksdaj;flksjad '})   //객체로 보낼 데이터를 집어넣음 //내가가진 객체를 제이슨 포맷으로 변환시키는거 
 // })
 // .then(res => res.json())
-// .then(result => console.log('insert, result'));
+// .then(result => console.log('insert', result));
 
 
 
@@ -45,7 +45,7 @@ fetch('http://localhost:3000/posts/4' , {
 
 
 //삭제(DEL)
-fetch('http://localhost:3000/posts/4', {
+fetch('http://localhost:3000/posts/5', {
     method:'delete'
 })
 .then(res => res.json())

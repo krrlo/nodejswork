@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs');  //파일 처리 관련 모듈 
 
 const data = 'hello, world';
 

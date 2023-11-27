@@ -4,15 +4,15 @@ const express = require('express');
 const app = express();
 
 
-const getData = async()=>{
-  return  await fetch('db.json')
-    .then(res => res.json());
+// const getData = async()=>{
+//   return  await fetch('db.json')
+//     .then(res => res.json());
    
-}
+// }
 
 
 
-let db = getData();  //json 데이터가 들어가있음
+//let db = getData();  //json 데이터가 들어가있음
 
 
 app.get('/', (req, res)=>{    //앤드포인트, commend (어떤식으로 응답할지 )
