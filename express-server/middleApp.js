@@ -1,4 +1,6 @@
 const express = require('express');
+const app = express();
+
 
 //세션 모듈 불러오기 
 const session = require('express-session'); 
@@ -6,16 +8,14 @@ const session = require('express-session');
 const cors = require('cors');
 
 
-const app = express();
-
-// application/www-form-urlencoded >>기본 컨텐트 타입 
+// application/www-form-urlencoded >>기본 컨텐트 타입  // 클라이언트로부터 받은 여러가지 데이터 유형을 처리하기위해 
 const defaultParser = express.urlencoded({extended : false});
 
-//application/json
+//application/json  제이슨 데이터 파싱을 위한 
 const jsonParser = express.json();  //바디가가지고있는 text 데이터를 변환해주는 역할 
 
 //미들웨어를 use메서드로 등록 >> 해당 서버가 가지고있는 모드 라우팅에 대해 동일하게 적용됨  
-app.use(defaultParser);   // jsonParser 넣으면 모든 서버에서 제이슨으로만 사용자가 입력하게..?
+app.use(defaultParser);  
 
 
 
@@ -37,7 +37,6 @@ app.listen(5000, ()=>{
 
 
 
-//화면없이 서버측에서 데이터를 요청할때..?
 //https://chromewebstore.google.com/detail/boomerang-soap-rest-clien/eipdnjedkpcnlmmdfdkgfpljanehloah?utm_source=app-launcher 크롬에 부메랑추가 해서 출력되는거 확ㅇ니
 //https://www.postman.com/downloads/?utm_source=postman-home 설치 
 
@@ -61,11 +60,12 @@ app.use(sessionSetting);
 
 
 //npm install cors  설치하깅 
-//cors
+
 
 
 const corsOptions = {                       //서버측에서 CORS를 허용해놔야함, 
-    origin : 'http://192.168.0.36:5500',  //허용할 도메인 설정  니가만든 페이지는아니지만 응답해라..라고 서버에 알려줌 
+    origin : 'http://192.168.0.16:5500',
+    //학원 origin : 'http://192.168.0.36:5500',  //허용할 도메인 설정  니가만든 페이지는아니지만 응답해라..라고 서버에 알려줌 
     optionsSuccessStatus : 200  //레거시.?..??????????????????????????   //node기반으로 expreess로 서버를 1개 연거 (페이지없음) / html파일을 라이브서버로 (페이지만있음) 연 것 
     
 }
@@ -75,14 +75,15 @@ const corsOptions = {                       //서버측에서 CORS를 허용해�
 app.use(cors(corsOptions));
 
 
-``
+
 //요청들어오면 세션자체는 자동생성됨  로그인하는거는 세션을 이용하는거 
 //세션정보 확인 
 
 
 app.get('/', (req, res)=>{
-    res.send(req.session);  //요청을하면서req가져오고 req가 가지고있는 세션 정보가 출력이 되어야하기떄문에 이렇게 작성 
+   res.send(req.session);  //요청을하면서req가져오고 req가 가지고있는 세션 정보가 출력이 되어야하기떄문에 이렇게 작성 
 });
+
 
 
 //세션에 로그인 정보 저장 

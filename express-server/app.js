@@ -2,28 +2,31 @@
 
 const fs =require('fs');
 const express = require('express');
+const app = express();
 //특정 파일의 라우터 객체 가져오기 
 const userRouter = require('./user.js');
-//////////////
-const app = express();
 
-//정적파일등록  http://localhost:3000/public/flower-purple-lical-blosso.jpg  //라우팅 하지 않아도 파일을 로드시킬수잇음 
-app.use('/public', express.static('images')); //폴더 자체로 경로등록 require이 ㅇㅏ니니ㅏㄲ 
+
+
+//정적파일등록  http://localhost:3000/public/flower-purple-lical-blosso.jpg  //라우팅 하지 않아도 파일을 로드시킬수잇음 //express의  미들웨어 모듈인 express.static을 사용 
+app.use('/public', express.static('images')); //  images 폴더에 있는 모든 정적 파일을 url로 제공할수 있게됨 
 
 //use를 이용해서 라우터 등록  
 app.use('/user' , userRouter);  
 //라우터의 전체도메인을 /user 가 모아주는 역할 
 //http://localhost:3000/user //user.js안에 있는 내용이 출력 
 //default 는 get방식 이라서 회원정보조회는 뜬다..?
+//app.use(미들웨어)
+//app.use(미들웨어 사용경로, 미들웨어)
 
 
-
-//에러 핸들러 등록 (미들웨어: 중간중간 들어오는 함수 요청-응답 사이에서 이루어지는 )
+//에러 핸들러 등록 (미들웨어: 중간중간 들어오는 함수 요청-응답 사이에서 이루어지는 )  에러에 대한 응답 처리 수행 
 app.use(function(err,req,res,next){
 res.status(500).json({statusCode:res.statusCode, errMessage:err.errMessage});    //제이슨으로 상태 코드(500)와 실제 에러 메세지를 보냄 
 
 });
-//에러처리 
+
+//에러처리 // 에러 발생시 next () 함수 사용해서 에러처리 핸들러로 에러를 전달하고  
 app.get('/error', (req,res,next)=>{
     next(new Error('process fail, check data ! 에러발생 ㅎㅎ'));
 })
@@ -32,14 +35,14 @@ app.get('/error', (req,res,next)=>{
 
 
 //제이슨 데이터를 db화 시키는 중 
-const jsonFile =fs.readFileSync('db.json');  //비동기로 움직여야해서 
-const jsonData =JSON.parse(jsonFile); //제이슨 타입으로 변경 
+const jsonFile =fs.readFileSync('db.json');  //비동기로 움직여야해서 //db.json 파일을 읽어옴 
+const jsonData =JSON.parse(jsonFile); //파일형태로 왔으니 다시 제이슨 타입으로 변경 
 const getData =(target, where)=>{    //ex  단건조회의 경우 'posts', req.params.id
-    let data = jsonData[target];  //객체의 정보가 넘어오면    //target은 키값 post comments profile  jsonData[key] = value가 찍히니까 
+    let data = jsonData[target];  //객체의 정보가 넘어오면    //[target]은 키값 [post] [comments] [profile]  jsonData[key] = value가 찍히니까 
     if(Array.isArray(data)){            //data가  Array라면 true, 아니라면 false.  //profile은 배열이 아니니까  배열만 돌릴라고 typeof는 배열을 obj로 봄 안됨  배열/obj 구분이 안됨
         let list = data;
         for(let obj of list){    //list배열에있는 obj객체를 하나씩 돌면서 
-            if(obj.id == where){                     //select 문이라고 생각 ..?   //where이 없닷면 if문 동작 안하고  원래 list=data 가 동작해서 전체가 나오게됨?
+            if(obj.id == where){                     //select 문이라고 생각 ..?   //where이 없닷면 if문 동작 안하고  원래 list=data 가 동작해서 전체가 나오게 됨 
                 data = obj;
             }
         }

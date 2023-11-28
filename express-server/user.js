@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 //ex) 블로그 메인 하나에 대한  //http://localhost:3000/user/insert
-router.get('/', (req,res)=>{
+router.get('/', (req,res)=>{   ///http://localhost:3000/user >> 회원정보조회가 뜸 
     res.send('회원정보조회');   //app기반이아니고 
 
 });
