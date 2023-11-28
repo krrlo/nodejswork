@@ -1,7 +1,7 @@
 
 //REST방식으로 CRUD
 
-//전체조회 (GET)
+//전체조회 (GET)  default = get 
 fetch('http://localhost:3000/posts')
 .then(res =>res.json())
 .then (data => console.log(data))
