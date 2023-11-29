@@ -1,9 +1,9 @@
 //메인실행페이지
 
-require('dotenv').config({ path: './db/mysql.env'}) //모듈, 메소드 //메인에서 실행 환경변수파일
+require('dotenv').config({ path: './db/mysql.env'}) //모듈, 메소드 //메인에서 실행 환경변수파일e  //db.js끌고왔으니까 알려주기 
 const express = require('express');
 const app = express();
-const mysql = require('./db.js');  //db파일을 불러옴 
+const mysql = require('./db.js');  //db.js에서 export한   query(함수)
 
 //미들웨어등록  //데이터 용량 제한 하는 
 app.use(express.json({  //모듈을 설정하지않고 자체적으로 불러온것.. 제이슨파서랑 같은거 
@@ -57,3 +57,4 @@ app.get('/customers/:id' , async (req, res)=>{
 });
 
 
+//1129
