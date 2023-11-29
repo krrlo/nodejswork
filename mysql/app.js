@@ -7,7 +7,7 @@ const mysql = require('./db.js');  //db파일을 불러옴
 
 //미들웨어등록  //데이터 용량 제한 하는 
 app.use(express.json({  //모듈을 설정하지않고 자체적으로 불러온것.. 제이슨파서랑 같은거 
-    limit : '50mb'
+    limit : '50mb'      //익스프레스가 가지고있는 json()
 }));
 
 
