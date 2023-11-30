@@ -1,10 +1,10 @@
 <template>
 <vueComponent/>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link> |   <!-- index.js path -->
+    <router-link to="/about">About</router-link>  
   </nav>
-  <router-view/>
+  <router-view/><!--라우터 뷰가 index.js component  , 링크에 맞는 컨포넌트가 나오게됨 -->
 </template>
 
 <script>
