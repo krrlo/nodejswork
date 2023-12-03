@@ -7,7 +7,7 @@
     <!--기본적으로 a태그 -->
     <router-link to="/IFBinding">IFBinding</router-link> |
     <!--기본적으로 a태그 -->
-    <router-link to="/OnEvent">OnEvent</router-link> |
+    <router-link to="/OnEvent">OnEvent </router-link> |
     <router-link to="/Options">Options</router-link>
   </nav>
   <router-view />

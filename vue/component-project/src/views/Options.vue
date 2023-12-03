@@ -38,9 +38,9 @@ const watch = {
     return {
       price: 0,
       count: 0,
-      amount: "",
-      tax: "",
-      total: "",
+      amount: 1000,
+      tax: 0,
+      total: 0,
     };
   },
 

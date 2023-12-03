@@ -10,6 +10,7 @@ module.exports = defineConfig({
         //슬러시로 시작하는 모든 경우 프록시 설정을 적용하겠다
         target,
         changeOrigin: true,
+        ws: false,
       },
     },
   },

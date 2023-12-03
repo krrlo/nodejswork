@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button v-on:click="addData">+</button>
-    <!--클릭이벤트  addData얘는 프로퍼티 아님 -->
+    <button v-on:click="addData">추가하기</button>
+    <!--클릭이벤트  addData얘는 프로퍼티 아님 v-on:event="핸들러" @click 해도됨-->
     <table>
       <thead>
         <tr>
@@ -83,7 +83,7 @@ export default {
       //addData: function(){} 함수를 객체에 등록하는 표기법
 
       let index = this.productList.length; //원래 길이 5  , 추가버튼을 누르게되면
-      this.productList[index] = obj; //인덱스를 기반으로 배열 변경    this.productList[6] = 6번째 인덱스에 obj를 넣어라  >>
+      this.productList[index] = obj; //인덱스를 기반으로 배열 변경    this.productList[5] = 5번째 인덱스에 새로운 obj를 넣어라
     }, //data함수
   }, //methods
 }; //익스포트
