@@ -25,7 +25,7 @@ app.get("/user", async (req, res) => {
 app.get("/user/:user_no", async (req, res) => {
   let data = req.params.user_no;
   let list = await mysql.query("userInfo", data);
-  res.send(list[0]);
+  res.send(list[0]); //select 결과는 항상 배열로 넘어옴
 });
 
 //등록
