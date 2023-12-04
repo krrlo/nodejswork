@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       searchNO: "", //라우터가 넘긴 값을 받을 프로퍼티도 필요함
-      userInfo: {},
+      userInfo: {}, //{user_no: 6, user_id: 'user2', user_pwd:
     };
   },
 
@@ -91,7 +91,8 @@ export default {
       let result = await axios
         .get(`/api/user/${this.searchNO}`) //app.get("/user/:user_no", async (req, res) =>
         .catch((err) => console.log(err));
-      this.userInfo = result.data; //데이터만필요하니까..
+      console.log(result);
+      this.userInfo = result.data; //데이터만필요하니까.. result= {data: {…}, status: 200, sta....}
     },
 
     async deleteInfo(userno) {
@@ -104,7 +105,7 @@ export default {
         alert("정상적으로 삭제x");
       } else {
         alert("정상적으로 ㅇ");
-        this.$router.push({ name: "userList" }); //path: "/userInfo",  //페이지가 바뀌어야 하니까 router호출
+        this.$router.push({ name: "userList" }); //path: "/userInfo",  //목록으로 페이지가 바뀌어야 하니까 router호출
       }
     },
 

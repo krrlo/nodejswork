@@ -61,25 +61,27 @@ export default {
 
   methods: {
     //디비 데이터 불러오는 함수
-    //axios의 결과 객체로 가지고옴 rseult= {data : {} , status : 200} 우리는 data만 가지고올꺼니까
+    //axios의 결과 객체로 가지고옴 result= {data : [{},{},...] , status : 200} 우리는 data만 가지고올꺼니까
     async getUserList() {
       let result = await axios
         .get("/api/user") //const target = "http://localhost:3000/api/user";라고 지정해줌
         .catch((err) => {
           console.log(err);
         });
+      console.log(result);
       let list = result.data;
-      this.userList = list;
+
+      this.userList = list; //data userList []에 넣기
     },
 
     goToUserInfo(id) {
       console.log(id);
       //페이지가 바뀌어야 하니까 router호출
       this.$router.push({ path: "/userInfo", query: { userId: id } }); //push메소드를 이용해서 호출 // 객체를 기반으로 값이 넘어감 path, //쿼리스트링.
-      //키를 userId로 넘김.     "/userInfo">>나중에 라우터에 등록  등록되어있는 라우터에게 요청하는메소드.  어떤 값이 넘어 가야 한다면 쿼리든 파람즈든 데이터를 넘겨줘야함. p
+      //키를 userId로 넘김.     "/userInfo">>나중에 라우터에 등록  등록되어있는 라우터에게 요청하는메소드.  어떤 값이 넘어 가야 한다면 쿼리든 파람즈든 데이터를 넘겨줘야함.
       //라우터를 특정짓는 path name 아무거나 넣어줘도됨
       //name: 라우터로 등록할때 사용한 name속성
-      //parmas :rest방식   path 속성 이 '/target/:id 일때 {'id' : 100 ..?}    파람즈/쿼리 두가지 방식............뭔소리고진짜
+      //parmas :rest방식   path 속성 이 '/target/:id 일때 {'id' : 100 ..?}    파람즈/쿼리 두가지 방식...
     },
     dataFormat(value) {
       let date = new Date(value);

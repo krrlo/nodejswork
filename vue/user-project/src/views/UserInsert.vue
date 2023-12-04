@@ -72,7 +72,7 @@ export default {
   },
 
   created() {
-    this.userInfo.join_date = this.getToday(); //오늘날짜가 나오게끔..
+    this.userInfo.join_date = this.getToday(); // 등록누르면 오늘날짜가 나오게끔..
   },
 
   methods: {
@@ -96,6 +96,7 @@ export default {
         .catch((err) => console.log(err));
 
       console.log(result.data);
+
       if (result.data.insertId == 0) {
         alert(`등록x \n메세지 확인하세요\n${result.data.message}`);
       } else {

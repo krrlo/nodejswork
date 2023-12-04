@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import UserList from "../views/UserList.vue";
-import UserInfo from "../views/UserInfo.vue";
-import UserInsert from "../views/UserInsert.vue";
-import UserUpdate from "../views/UserUpdate.vue";
+import UserList from "../views/UserList.vue"; //전체조회
+import UserInfo from "../views/UserInfo.vue"; //한건조회
+import UserInsert from "../views/UserInsert.vue"; //등록
+import UserUpdate from "../views/UserUpdate.vue"; //수정
 
 const routes = [
   {
@@ -25,7 +25,7 @@ const routes = [
   },
 
   {
-    path: "/userUpdate", //http://localhost:8080/userUpdate/15  "/userUpdate/:id",
+    path: "/userUpdate", //(http://localhost:8080/userUpdate/15  "/userUpdate/:id", == 파람즈)
     name: "userUpdate",
     component: UserUpdate,
   },

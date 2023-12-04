@@ -85,6 +85,7 @@ export default {
         .get(`/api/user/${this.searchNO}`) //app.get("/user/:user_no", async (req, res) =>
         .catch((err) => console.log(err));
       this.userInfo = result.data; //을 기준으로 필드값만
+      //가입날짜 포맷변경
       let newDate = this.dateFormat(this.userInfo.join_date);
       this.userInfo.join_date = newDate;
     },
@@ -110,7 +111,7 @@ export default {
     async updateinfo() {
       //유효성 제약조건 원래는 해야함
       let data = {
-        param: this.userInfo,
+        param: this.userInfo, //객체하나 파람으로 만들기
       };
       let result = await axios
         .put(`/api/user/${this.userInfo.user_no}`, data) //readonly라고 ㅎㅐ놔서.. 이렇게 써도된대.??
@@ -121,7 +122,7 @@ export default {
         alert(`수정x \n메세지 확인하세요\n${result.data.message}`);
       } else {
         alert(`정상적으로 수정되었습니다\nNO.${result.data.insertId}`);
-        this.$router.push({ name: "userList" });
+        this.$router.push({ name: "userList" }); //목록으로이동
       }
     },
   }, //메소드
