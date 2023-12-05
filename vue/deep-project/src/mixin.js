@@ -17,7 +17,7 @@ export default {
         .replace("dd", day);
       return result;
     }, //dateformat
-  },
+  }, //methods
 
   created() {
     //공통적으로 진행되는 코드
@@ -26,7 +26,6 @@ export default {
 
   mounted() {
     //공통적으로 진행되는 코드
-
     console.log("dom에 마운트");
   },
 };

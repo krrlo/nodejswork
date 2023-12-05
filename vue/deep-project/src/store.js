@@ -14,7 +14,7 @@ const store = createStore({
       ],
       count: 0,
     };
-  },
+  }, //state
   getters: {
     cartCount: (state) => {
       //computed속성과 비슷,

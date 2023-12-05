@@ -7,6 +7,7 @@
 </template>
 
 <script>
+//자식컨포넌트 1205집
 import PropsCom from "./components/PropsComponent.vue";
 import SloatCom from "./components/TextModal.vue";
 import Composition from "./components/CompositionInterface.vue";
@@ -32,5 +33,5 @@ export default {
 
 //SloatCom 얘를 인풋박스에 넣으면selected에 들어가고   <component v-bind:is="SloatCom">
 // <component v-bind:is="selected"></component> 동적으로 컨포넌트가 변환되어야할때 사용
-//is라는 속성으로 내가 들고있는 컨포넌트 중에서 어떤 컨포넌트를 출력할지 알려줘야함
+//is라는 속성**으로 내가 들고있는 컨포넌트 중에서 어떤 컨포넌트를 출력할지 알려줘야함
 </script>

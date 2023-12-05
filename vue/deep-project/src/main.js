@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import mixin from "./mixin.js";
-import store from "./store.js";
+import mixin from "./mixin.js"; //mixin import
+import store from "./store.js"; //store import
 
 createApp(App)
   .use(store)
@@ -23,5 +23,5 @@ createApp(App)
         el.style.color = "black";
       }
     },
-  })
-  .mount("#app"); //mixin 등록하기
+  }) //.directive
+  .mount("#app");

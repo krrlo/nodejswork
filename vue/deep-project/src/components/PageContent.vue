@@ -9,7 +9,6 @@
     <tr>
       <th>제목</th>
       <td>{{ title }}</td>
-      //
       <th>조회수</th>
       <td>{{ readInfo }}</td>
       <!--얘 조회수를 부모한테 넘겨서 디비 수정하게 -->
@@ -63,7 +62,7 @@ export default {
       },
     },
     content: String,
-  },
+  }, // 부모로부터 받은 props들
   computed: {
     readInfo() {
       return this.count + 1;
@@ -72,6 +71,7 @@ export default {
   methods: {
     //(이벤트전달)자식이벤트 부모한테 넘겨주는 코드 여기서 끝나는게 아니라
     updateInfo() {
+      //두번째 매개변수로 부모에게 넘길데이터를 전달. "update-info" 라는 이름으로
       this.$emit("update-info", this.readInfo);
     },
   },
