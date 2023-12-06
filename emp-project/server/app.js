@@ -3,7 +3,7 @@ require("dotenv").config({ path: "./db/mysql.env" }); //환경변수파일
 const express = require("express"); //설치된 모듈 불러오기
 const app = express();
 
-const mysql = require("./db.js"); //db.js 파일 가져오기
+const mysql = require("./db.js"); //db.js 파일 가져오기   mysql = { query }
 
 app.use(
   express.json({
@@ -34,40 +34,41 @@ app.get("/dept", async (req, res) => {
 app.get("/emp/:emp_no", async (req, res) => {
   let data = req.params.emp_no;
   let list = await mysql.query("empInfo", data);
-  res.send(list[0]); // 배열로 넘어오니까 단건조회로
+  res.send(list[0]); // 배열로 넘어오니까
 });
 
+//테이블 별로 객체를 만들기위해
 const empT = ["emp_no", "first_name", "last_name", "gender", "hire_date"];
 const deptT = ["emp_no", "dept_no", "from_date", "to_date"]; //sql.js 순서 지키기
 const salT = ["emp_no", "salary", "from_date", "to_date"];
 
 app.post("/emp", async (req, res) => {
-  let empInfo = req.body.param; //전체 파람 들어옴
+  let empInfo = req.body.param; //전체 파람 들어옴 //사용자가 입력한 값 가져오기
 
-  ///사원등록
+  ///사원정보 등록
   let empData = {}; //우리가 넘길 빈 객체 set ?  뒤에는 객체가 넘어가야함
   for (let column of empT) {
     //emp테이블의 칼럼을 빼내는데
-    let value = empInfo[column]; //1000 = empInfo[emp_no]  전체객체[empT칼럼들]
+    let value = empInfo[column]; //1000 = empInfo[emp_no]
     if (value == "") continue; //그냥 ,다음꺼로 .. null은 그냥 통과됨 ""공백은 최소한의 체크
     empData[column] = value; // empData[emp_no] = 1000
   }
 
-  //let colum = 'emp_no'
+  //let column = 'emp_no'
   //let value = empInfo['emp_no]
   //empData['emp_no'] = value
+  console.log(empData);
+  let result = await mysql.query("empInsert", empData); //객체를 넘김
 
-  let result = await mysql.query("empInsert", empData);
-
-  //부서등록//배열 물음표3개
-  let deptEmpData = [];
+  //부서등록
+  let deptData = []; //값이 3개라 배열로 넘김
   for (let column of deptT) {
     let value = empInfo[column];
-    if (value == "") continue; //공백만 체크하니까
-    deptEmpData.push(value);
+    if (value == "") continue;
+    deptData.push(value);
   }
-
-  result = await mysql.query("deptInsert", deptEmpData);
+  console.log(deptData);
+  result = await mysql.query("deptInsert", deptData); //일반값 3개를 배열로 넘김
 
   //급여등록
   let salData = {};
@@ -77,12 +78,14 @@ app.post("/emp", async (req, res) => {
     salData[column] = value;
   }
 
-  salData.to_date = "9999-01-01"; //변수에담던지 결과를 돌려주는..?
-  result = await mysql.query("salInsert", salData);
+  salData.to_date = "9999-01-01"; //사용자로부터 입력받지 않으니까 정해줌
+
+  console.log(salData);
+  result = await mysql.query("salInsert", salData); //객체 하나 넘김
 
   res.send(result); //결과를 돌려주면서 통신을 끝냄
   //res.end(); 보낼거 없으면 통신 끊김
-  //"affectedRows": 1 이면 등록
+  //"affectedRows": 1 이면 등록된것
 }); //post
 
 //수정

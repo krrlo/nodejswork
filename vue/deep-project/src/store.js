@@ -34,10 +34,11 @@ const store = createStore({
   actions: {
     // 매개값 (context , 컴포넌트가 넘기는 데이터)  context >> 얘는 우리가 정의한 reateStore 전체가 넘어옴 , 동시다발적 접근이 가능함
     addProduct(context, info) {
+      //mutations에 정의되어있는 함수를 끌고와서
       setTimeout(() => {
         context.commit("addProduct", info);
       }, 1000);
-    },
+    }, //addProduct
   }, //actions
 
   plugins: [
