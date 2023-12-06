@@ -77,7 +77,10 @@ export default {
         product_name: this.productInfo.product_name,
         category: this.productInfo.category,
       };
-      this.$store.commit("addProduct", obj);
+      //this.$store.commit("addProduct", obj);  >>>mutations
+      //mutation이 등록된 함수 중에  state에 정의된 값을 변경할때
+      //커밋에 모든상태에 대한 추적이 가능한 기록이 남음
+      this.$store.dispatch("addProduct", obj); // >>actions
     },
   },
 };

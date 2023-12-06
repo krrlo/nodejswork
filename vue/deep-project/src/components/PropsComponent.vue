@@ -11,10 +11,10 @@
       :content="{ first: 'node.js', second: 've js' }"
     /> -->
     <PageContent v-bind="info" @update-info="handler" />
-    <!--info 객체 하나를 자식에게 넘김 //  @update-info="handler" v-on:update-info="함수명" 자식으로 부터 받은 이벤트처리-->
+    <!--info 객체 하나를 자식에게 넘김 // emit @update-info="handler" v-on:update-info="함수명" 자식으로 부터 받은 이벤트처리-->
     <Ref ref="child" />
-    <!--리프의 이름을 child라고 정의 자식 컨포넌트가 가진 속성을 사용하려고 -->
     <button @click="childHandler">부모버튼</button>
+    <!--리프의 이름을 child라고 정의 유니크한 이름으로 정의  자식 컨포넌트가 가진 속성을 사용하려고 -->
     <!-- 자식 컨포넌트에 전달되는 애들 count="10" 이케하면 카운트가 문자열로 인식이 됨 101로 출력됨 -->
   </div>
 </template>
