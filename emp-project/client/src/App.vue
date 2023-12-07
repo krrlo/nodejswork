@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Header />
     <router-view />
     <Footer />
@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Header from "./layouts/Header.vue";
-import Footer from "./layouts/footer.vue";
+import Header from "./layouts/HeaderComponent.vue";
+import Footer from "./layouts/FooterComponent.vue";
 
 export default {
   components: {

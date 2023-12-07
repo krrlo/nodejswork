@@ -85,19 +85,19 @@ app.post("/emp", async (req, res) => {
 
   res.send(result); //결과를 돌려주면서 통신을 끝냄
   //res.end(); 보낼거 없으면 통신 끊김
-  //"affectedRows": 1 이면 등록된것
+  //"affectedRows": 1 이면 등록된것  //원래는 insertId
 }); //post
 
 //수정
 app.put("/emp/:emp_no", async (req, res) => {
   let datas = [req.body.param, req.params.emp_no]; //배열을 보냄. 물음표가 2개
   let result = await mysql.query("empUpdate", datas);
-  res.send(result);
+  res.send(result); // //"changedRows":
 });
 
 //삭제 //삭제는 원래 body 부분이 없음 express는 body부분이 있음
 app.delete("/emp/:emp_no", async (req, res) => {
   let datas = [req.body.param.to_date, req.params.emp_no]; //배열을 보냄. 물음표가 2개
   let result = await mysql.query("empDelete", datas);
-  res.send(result);
+  res.send(result); //affectedRows
 });
