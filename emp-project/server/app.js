@@ -1,4 +1,5 @@
 //실행되는 서버. server
+//뭐야....
 require("dotenv").config({ path: "./db/mysql.env" }); //환경변수파일
 const express = require("express"); //설치된 모듈 불러오기
 const app = express();
@@ -101,3 +102,4 @@ app.delete("/emp/:emp_no", async (req, res) => {
   let result = await mysql.query("empDelete", datas);
   res.send(result); //affectedRows
 });
+/
