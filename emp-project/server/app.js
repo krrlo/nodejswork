@@ -65,7 +65,7 @@ app.post("/emp", async (req, res) => {
   for (let column of deptT) {
     let value = empInfo[column];
     if (value == "") continue;
-    deptData.push(value);
+    deptData.push(value); //배열엔 value 값만 넘어가는거임.,,
   }
   console.log(deptData);
   result = await mysql.query("deptInsert", deptData); //일반값 3개를 배열로 넘김
