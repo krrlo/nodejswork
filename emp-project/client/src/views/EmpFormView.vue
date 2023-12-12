@@ -64,7 +64,8 @@
       <!-- 첫번째 -->
       <button class="btn btn-success" @click="saveInfo(searchNo)">저장</button>
       <!-- 두번째 -->
-      <!-- <button class="btn btn-success" @click="isUpdated ? empUpdate() : empInsert()">저장</button> -->
+      <!-- <button class="btn btn-success" @click="isUpdated ? empUpdate() : empInsert()">저장</button> 
+      수정이면 this.isUpdated = true; 버튼이벤트 empUpdate() 실행  //  false면(등록이면)  이벤트  empinsert() -->
     </div>
   </div>
 </template>
@@ -97,21 +98,22 @@ export default {
     //수정모드인경우
     if (this.searchNo > 0) {
       //무조건 searchNo 자동으로  null undefind 0 다 걸림
-      this.getEmpInfo();
+      this.getEmpInfo(); //한건 조회해서 인풋에 넣고
       this.isUpdated = true; // 수정모드니까 급여와 소속부서 선택을 막음..
     } else {
-      this.empInfo.hire_date = this.getToday(); //등록할때 날짜 고정값으로 설정
+      this.empInfo.hire_date = this.getToday(); //등록이면  hire_date를 오늘 날짜로 설정
     }
   },
   methods: {
+    // 수정일 경우 한건 조회된거 뿌려주기
     async getEmpInfo() {
       let result = await axios
         .get(`/api/emp/${this.searchNo}`)
         .catch((err) => console.log(err));
-      this.empInfo = result.data;
+      this.empInfo = result.data; //한건객체완성
       this.empInfo.hire_date = this.$dateFormat(
         this.empInfo.hire_date,
-        "yyyy-MM-dd" //변화작업추가
+        "yyyy-MM-dd" //hire date를 원하는 형식으로 hiredate 변화작업추가
       );
     },
 
@@ -123,13 +125,16 @@ export default {
       this.deptList = result.data;
     },
 
+    // this.empInfo.hire_date = this.getToday(); //오늘 날짜 설정하려고
     getToday() {
       return this.$dateFormat("", "yyyy-MM-dd");
     },
+    ////공통
+
     /* 첫번째 */
     //axios.get   axios.post가 아니라  axios만 호출해서 객체를 만들어서 넘기는 방식
     async saveInfo(no) {
-      let info = this.getInfo(no);
+      let info = this.getInfo(no); // 수정. 등록 다
 
       let result = await axios(info);
       if (result.data.affectedRows > 0) {
@@ -139,6 +144,8 @@ export default {
         alert("정상적으로 처리되지 않았습니다.");
       }
     },
+
+    //수정인지 등록인지 여기서 구별
     getInfo(eno) {
       let method = "";
       let url = "";
@@ -173,7 +180,8 @@ export default {
         data,
         url,
       };
-    },
+    }, // getInfo
+
     /* 두번째 */
     //등록
     async empInsert() {
