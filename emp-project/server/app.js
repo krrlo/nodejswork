@@ -1,5 +1,5 @@
 //실행되는 서버. server
-//뭐야....
+//뭐야.... 진짜뭐냐고 이상해
 require("dotenv").config({ path: "./db/mysql.env" }); //환경변수파일
 const express = require("express"); //설치된 모듈 불러오기
 const app = express();
