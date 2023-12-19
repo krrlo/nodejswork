@@ -102,4 +102,3 @@ app.delete("/emp/:emp_no", async (req, res) => {
   let result = await mysql.query("empDelete", datas);
   res.send(result); //affectedRows
 });
-/
