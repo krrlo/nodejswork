@@ -1,4 +1,5 @@
 //실행되는 서버. server
+//뭐야.... 진짜뭐냐고 이상해
 require("dotenv").config({ path: "./db/mysql.env" }); //환경변수파일
 const express = require("express"); //설치된 모듈 불러오기
 const app = express();
@@ -77,7 +78,7 @@ app.post("/emp", async (req, res) => {
   for (let column of deptT) {
     let value = empInfo[column];
     if (value == "") continue;
-    deptData.push(value);
+    deptData.push(value); //배열엔 value 값만 넘어가는거임.,,
   }
   console.log(deptData);
   result = await mysql.query("deptInsert", deptData); //일반값 3개를 배열로 넘김
