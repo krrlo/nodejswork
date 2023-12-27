@@ -45,6 +45,11 @@ const salT = ["emp_no", "salary", "from_date", "to_date"];
 app.post("/emp", async (req, res) => {
   let empInfo = req.body.param; //전체 파람 들어옴 //사용자가 입력한 값 가져오기
 
+  let info = {
+    title: data.title,
+    writer: data.writer,
+  }; //로 하던지..
+
   ///사원정보 등록
   let empData = {}; //우리가 넘길 빈 객체 set ?  뒤에는 객체가 넘어가야함
   for (let column of empT) {
@@ -55,8 +60,15 @@ app.post("/emp", async (req, res) => {
   }
 
   //let column = 'emp_no'
-  //let value = empInfo['emp_no]
+  //let value = empInfo['emp_no']
   //empData['emp_no'] = value
+  //empData[emp_no] = value  다르대..
+
+  //info[field] =  data[field];  >field>변수명임..
+
+  //info.field = data.field             >>실제 존재하는 field 명을 지칭
+  //info['field'] = data['field'];
+
   console.log(empData);
   let result = await mysql.query("empInsert", empData); //객체를 넘김
 
