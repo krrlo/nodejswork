@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+      .selected {
+        background-color: goldenrod;
+      }
+
+      .right {
+        text-align: right;
+      }
+
+      .left {
+        text-align: left;
+      }
+
+      .blue {
+        background-color: skyblue;
+      }
+
+      .green {
+        background-color: green;
+      }
+
+      .emphasis {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button type="button" id="insertBtn">+</button>
+      <select>
+        <option>일반</option>
+        <option>VIP</option>
+      </select>
+      <table id="list">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="allChk" /></th>
+            <th>No.</th>
+            <th>구분</th>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>이름</th>
+            <th>가입날짜</th>
+            <th>Del</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td><input type="checkbox" /></td>
+            <td>001</td>
+            <td>일반</td>
+            <td name="id">user01</td>
+            <td><input type="password" value="1234" /></td>
+            <td><p>한지수</p></td>
+            <td>2023-10-31</td>
+            <td><button type="button">Del</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>002</td>
+            <td>VIP</td>
+            <td name="id">user99</td>
+            <td><input type="password" value="9999" /></td>
+            <td><p id="here">강호동</p></td>
+            <td>2023-11-11</td>
+            <td><button type="button">Del</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      //1)헤더를 구성하는 항목 = > 별도의 배열에 담아보기..
+      let headList = $("th"); //배열로 담김
+      console.log(headList);
+      headList = $("#list thead th"); //headList = $("#list thead > th"); 이렇게 하면 안된대
+      let array = [];
+      headList.each((i, t) => {
+        //foreach와같은 jquery 함수 = each
+        //onsole.log(t.text()); //t.text is not a function 내부 t는 제이쿼리 객체가 아님 , 인덱스를 이용해서,, 반복문을 이용해서 꺼낸다면 제이쿼리가 아니게됨
+        //자바스크립트
+        // console.log(t.textContent);
+        //jquery 객체로 다시 변환
+        //console.log($(t).text());
+        // array.push(t.textContent);
+
+        let value = null;
+        if (i == 0) {
+          value = $(t).children().attr("type");
+        } else {
+          value = t.textContent;
+        }
+        array.push(value);
+      }); //each
+
+      console.log(array);
+
+      //2) 특정 속성 값만 사용
+      console.log($("#here"));
+      console.log($(".selected"));
+      console.log($('[name="id"]'));
+
+      //3 복합선택자 - id속성이 here인 태그를 하위요소로 두는 tr태그
+      //3-1
+      console.log($("#here").parent().parent());
+      console.log($("#here").closest("tr")); //내 기준 가장 가까운 상위요소 찾기
+      //3-2
+      console.log($("tr:has(#here)"));
+
+      //js
+      console.log(
+        document.getElementById("here").parentElement.previousElementSibling
+          .firstElementChild.value
+      );
+
+      //제이쿼리방식 .children().first() 첫번째 자식
+
+      console.log($("#here").parent().prev().children().first().val());
+
+      $('input[type="password"]').prop("type", "text"); //공백들어가지않게 주의
+      $("#list , #list *").not("input,p,button").css("border", "1px solid");
+
+      //4 ) 핸들러걸기
+      //on('event' , function(evnet){
+      // target,currentTarget  stopPropagation() 버블링 막기  , preventDefault() submit, a 무력화
+      //});
+
+      // document.querySelectorAll("#list tbody > tr").forEach((trTag) => {
+      //   trTag.addEventListener("click", function (event) {
+      //     event.currentTarget.classList.toggle("selected"); //toggle >>  존재하면 삭제 , 없으면 추가
+      //   });
+      // });
+
+      $("#list tbody > tr").on("click", function (e) {
+        $(e.currentTarget).toggleClass("selected");
+        //console.log(e.currentTarget); //핸들러가 부착된
+        //console.log(e.target);
+      });
+
+      //del 버튼에 click이벤트
+      $("tbody button:contains(Del)").on("click", function (e) {
+        e.stopPropagation();
+        // 선택된 tr을 복사해서 맨 마지막 줄에 추가
+        let selectedTr = $(e.currentTarget).closest("tr");
+        let copy = selectedTr.clone(); //통째로 복사 clone
+        $("#list tbody").append(copy);
+
+        // 선택한 tr을 삭제
+        selectedTr.remove(); //대상을 삭제
+        //selectedTr.empty(); //하위요소를 삭제
+      });
+
+      //select 태그에 change 이벤트
+
+      $("select").on("change", function (e) {
+        let trTag = $("<tr></tr>"); //tr태그 만들겠습니당..
+        let tdTag = $("<td/>"); //닫는태그 하나만 해도됨..
+        let inputTag = $('<input type="checkbox"/>'); // type :"checkbox"
+
+        tdTag.append(inputTag); //td에 -input 태그 달기
+        trTag.append(tdTag); // tr에 -td달기
+
+        tdTag = $("<td/>").text("003"); // td 생성하면서 ㅂ ㅏ로 값을 부여
+        trTag.append(tdTag); // tr에 -td달기
+
+        tdTag = $("<td/>").text(e.currentTarget.value); // td 생성하면서 ㅂ ㅏ로 값을 부여
+        trTag.append(tdTag); // tr에 -td달기
+
+        tdTag = $("<td/>").text(); // td 생성하면서 ㅂ ㅏ로 값을 부여
+        trTag.append(tdTag); // tr에 -td달기
+
+        tdTag = $("<td/>").attr("name", "id").text("user03");
+        trTag.append(tdTag);
+
+        tdTag = $("<td/>").append(
+          $("<input/>").attr("type", "password").val(5555)
+        );
+        trTag.append(tdTag);
+
+        tdTag = $("<td><p>이주은</p></td>");
+        trTag.append(tdTag);
+
+        tdTag = $("<td></td>").text("2023-11-11");
+        trTag.append(tdTag);
+
+        tdTag = $("<td/>");
+        let btnTag = $("<button/>").attr("type", "button").text("Del");
+        tdTag.append(btnTag);
+        trTag.append(tdTag);
+
+        console.log(trTag);
+
+        $("#list tbody").append(trTag);
+      });
+      //전체 선택 시 이벤트 처리
+      $("#allChk").on("click", function (e) {
+        let result = e.currentTarget.checked;
+        $(":checkbox").prop("checked", result); //allchk가 가지고 있는 값을 prop에 뿌려준거
+      });
+      //  $("input :checked") >>체크된 애 가지고오는거   $(":selected")
+    </script>
+  </body>
+</html>
+
+<!-- <td><input type="checkbox" /></td>
+<td>002</td>
+<td>VIP</td>
+<td name="id">user99</td>
+<td><input type="password" value="9999" /></td>
+<td><p id="here">강호동</p></td>
+<td>2023-11-11</td>
+<td><button type="button">Del</button></td> -->

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+      .blue {
+        color: skyblue;
+      }
+      .red {
+        color: orange;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1>where do you want to go..........</h1>
+      <h2>travel destinations</h2>
+      <p>plan your next adventure.</p>
+      <ul id="destinations">
+        <li>roma</li>
+        <li class="blue">paris</li>
+        <li class="blue">rio</li>
+      </ul>
+    </div>
+
+    <script>
+      //   let rr = $("#destinations").css("color", "gray"); // ()안에ㅐ 문자열, 변수, 등 다 들어갈수있음 ..css("color", "gray"); 동일하게 속성 적용 가능
+      //   console.log(typeof rr); //결과가 배열로 들어옴
+      //   console.log(rr); //결과가 배열로 들어옴
+
+      //selector : 탐색..
+      //# : id속성
+      $("#destinations");
+      console.log($("#destinations"));
+
+      //.:class속성
+      $(".blue");
+      console.log($(".blue"));
+
+      //tagname
+      console.log($("h1"));
+
+      //[attribute] : 일반속성
+      console.log($("[name]"));
+
+      //관계를 기반  (하위요소 = 공백 ) (자식요소 > )
+      console.log($("ul > li"));
+
+      // innerhtml : html()
+      // textContent: text()
+      // class : addClass() removeClass() hasClass() toggleClass():현재 가지고있는 값을 클래스가 가지고있으면 삭제, 없으면 추가..?
+      // value : val()
+      // style : css()
+      // 기타 :prop() :dom 이 가진..node가... property...? ?? , attr()   : 속성을 다룬다는 점에선 같다....
+
+      let result = $("ul").html();
+      console.log(result); //  <li>roma</li>
+      result = $("ul").text();
+      console.log(result);
+
+      $("h1").text("안녕못한다.."); //h1이 가지고 있는 값을 변경
+      $("h2").css("background-color", "green");
+      let re = $("h2").css("background-color");
+      console.log(re); //rgb(0, 0, 0)
+
+      //$("p").attr("name", "dumi");
+      $("p").prop("id", "dumi");
+
+      //html attribute <= attr
+      //dom property <= prop
+    </script>
+  </body>
+</html>
