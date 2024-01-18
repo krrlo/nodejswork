@@ -84,12 +84,13 @@
       let array = [];
       headList.each((i, t) => {
         //foreach와같은 jquery 함수 = each
-        //onsole.log(t.text()); //t.text is not a function 내부 t는 제이쿼리 객체가 아님 , 인덱스를 이용해서,, 반복문을 이용해서 꺼낸다면 제이쿼리가 아니게됨
+        //onsole.log(t.text()); //t.text is not a function 내부 t는 제이쿼리 객체가 아님 , t는 rawdata , t는 자바스크립트 . 인덱스를 이용해서,, 반복문을 이용해서 꺼낸다면 제이쿼리가 아니게됨
+
         //자바스크립트
         // console.log(t.textContent);
-        //jquery 객체로 다시 변환
+
+        //jquery 메소드를 다시 쓰겠다하면... jquery객체로 다시 변환
         //console.log($(t).text());
-        // array.push(t.textContent);
 
         let value = null;
         if (i == 0) {
